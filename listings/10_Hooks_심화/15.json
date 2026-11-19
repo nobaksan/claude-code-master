@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "다음 셸 명령 호출이 시스템의 보안이나 데이터를 위협하는지 평가한다: $ARGUMENTS. 안전하면 ok를 true로, 위험하면 ok를 false로 하고 reason에 구체적 이유를 적는다.",
+            "model": "claude-haiku-5-5",
+            "timeout": 30,
+            "continueOnBlock": true
+          }
+        ]
+      }
+    ]
+  }
+}

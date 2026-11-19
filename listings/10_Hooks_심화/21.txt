@@ -1,0 +1,3 @@
+/goal test/auth 의 모든 테스트가 통과하고 lint 단계가 깨끗하다. 다른 테스트 파일은 고치지 않는다. 20턴이 지나면 멈춘다
+/goal
+/goal clear

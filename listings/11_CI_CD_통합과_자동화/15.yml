@@ -1,0 +1,14 @@
+# 자동 수정 잡(claude-autofix.yml)의 steps: 아래 맨 끝에 붙이는 단계
+- name: Notify Slack
+  if: always()
+  env:
+    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    BRANCH: ${{ github.event.workflow_run.head_branch }}
+  run: |
+    if [ "${{ job.status }}" == "success" ]; then
+      MSG="Claude Auto-fix 성공: $BRANCH"
+    else
+      MSG="Claude Auto-fix 실패: $BRANCH 수동 확인 필요"
+    fi
+    jq -n --arg t "$MSG" '{text: $t}' |
+      curl -X POST "$SLACK_WEBHOOK" -H "Content-Type: application/json" -d @-

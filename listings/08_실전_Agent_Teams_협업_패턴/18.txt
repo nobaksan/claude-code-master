@@ -1,0 +1,5 @@
+main (보호 브랜치)
+ └── feature/avatar-upload (통합 브랜치)
+      ├── avatar-frontend (프론트엔드 에이전트 전용)
+      ├── avatar-backend (백엔드 에이전트 전용)
+      └── avatar-tests (테스트 에이전트 전용)

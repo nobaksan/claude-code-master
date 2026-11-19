@@ -1,0 +1,7 @@
+{
+  "env": {
+    "HTTPS_PROXY": "http://proxy.company.com:8080",
+    "HTTP_PROXY": "http://proxy.company.com:8080",
+    "NO_PROXY": "localhost,127.0.0.1,.company.internal,10.0.0.0/8"
+  }
+}

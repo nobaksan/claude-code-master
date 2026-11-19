@@ -1,0 +1,32 @@
+{
+  "model": "opus",
+  "env": {
+    "BASH_DEFAULT_TIMEOUT_MS": "300000"
+  },
+  "permissions": {
+    "allow": [
+      "Edit",
+      "Bash(npm run *)",
+      "Bash(pnpm test *)",
+      "Bash(pytest *)",
+      "Bash(cargo test *)",
+      "Bash(go test *)",
+      "Bash(docker compose *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(jq *)",
+      "Bash(make *)"
+    ],
+    "deny": [
+      "Bash(sudo *)",
+      "Edit(//etc/**)",
+      "Edit(//usr/**)",
+      "Edit(//var/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true
+  }
+}

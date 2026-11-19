@@ -1,0 +1,28 @@
+# deploy-pipeline.yml 의 jobs: 아래, deploy-production 다음에 이어 붙이는 잡
+jobs:
+  rollback-check:
+    needs: deploy-production
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Analyze Failure and Rollback
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash
+          export PATH="$HOME/.local/bin:$PATH"
+          # 에러 로그 수집 (배포 플랫폼 CLI에 맞게 바꾼다)
+          LOGS=$(railway logs --tail 100 2>/dev/null || echo "로그 수집 실패")
+          # Claude Code로 분석
+          ANALYSIS=$(claude --print "배포 후 다음 에러가 발생했다:
+          $LOGS
+          즉시 롤백이 필요한가? 'ROLLBACK_NOW' 또는 'INVESTIGATE_FIRST'로만 응답해줘.")
+          if echo "$ANALYSIS" | grep -q "ROLLBACK_NOW"; then
+            echo "즉시 롤백 실행"
+            railway rollback --environment production
+          else
+            echo "원인 조사 후 수동 결정 필요"
+            jq -n '{text: "프로덕션 배포 이상. 수동 확인 필요"}' |
+              curl -X POST "$SLACK_WEBHOOK" -H "Content-Type: application/json" -d @-
+          fi

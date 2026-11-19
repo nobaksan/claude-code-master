@@ -1,0 +1,11 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.anthropic.com",
+    "BASH_DEFAULT_TIMEOUT_MS": "300000",
+    "HTTPS_PROXY": "http://proxy.company.com:8080",
+    "HTTP_PROXY": "http://proxy.company.com:8080",
+    "NO_PROXY": "localhost,127.0.0.1,.internal",
+    "NODE_ENV": "development",
+    "PYTHONPATH": "/workspace/lib"
+  }
+}

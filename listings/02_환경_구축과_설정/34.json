@@ -1,0 +1,38 @@
+{
+  "model": "opus",
+  "permissions": {
+    "allow": [
+      "Edit(./src/**)",
+      "Edit(./tests/**)",
+      "Edit(./docs/**)",
+      "Edit(*.md)",
+      "Edit(*.json)",
+      "Edit(*.yaml)",
+      "Edit(*.yml)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npx *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git branch *)",
+      "Bash(docker compose up *)",
+      "Bash(docker compose down)",
+      "Bash(docker compose logs *)"
+    ],
+    "ask": [
+      "Bash(git push *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(npm publish *)",
+      "Bash(docker push *)",
+      "Bash(vercel --prod)",
+      "Edit(.env*)",
+      "Read(.env.production)"
+    ]
+  },
+  "env": {
+    "BASH_DEFAULT_TIMEOUT_MS": "180000",
+    "NODE_ENV": "development"
+  }
+}

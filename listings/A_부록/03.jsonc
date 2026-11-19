@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "defaultMode": "default",     // 목록에 없는 행동은 모두 확인
+    "allow": ["Read(src/**)", "Edit(src/**)"],
+    "deny": [
+      "Bash(*)",              // 모든 쉘 명령 차단
+      "Edit(.env*)",          // 환경 변수 파일 수정 차단
+      "Edit(*.key)",          // 키 파일 수정 차단
+      "Read(.env*)", "Read(*secret*)"
+    ]
+  }
+}

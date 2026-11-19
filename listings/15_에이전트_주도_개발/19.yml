@@ -1,0 +1,6 @@
+- name: Analyze and Fix with Claude Code
+  uses: anthropics/claude-code-action@v1
+  with:
+    anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+    prompt: "failure.log를 분석하고 수정 가능하면 파일을 고쳐줘"
+    claude_args: "--allowedTools Edit,Read,Bash,Grep --max-turns 10"

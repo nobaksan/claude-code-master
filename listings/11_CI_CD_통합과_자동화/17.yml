@@ -1,0 +1,22 @@
+# .github/workflows/secure-automerge.yml
+name: Security Scan then Auto-merge
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  scan-and-merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Security Scan
+        run: |
+          npm audit --audit-level=high
+          pipx run semgrep scan --config=auto --error .
+      - name: Auto-merge if secure
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge --auto --squash "${{ github.event.pull_request.number }}"

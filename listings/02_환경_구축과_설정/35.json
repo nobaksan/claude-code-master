@@ -1,0 +1,31 @@
+{
+  "model": "sonnet",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_REGION": "ap-northeast-2",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "<조직이 승인한 Bedrock 모델 ID>",
+    "HTTPS_PROXY": "http://egress-proxy.internal.bank.com:8080",
+    "NO_PROXY": "localhost,127.0.0.1,.internal.bank.com",
+    "BASH_DEFAULT_TIMEOUT_MS": "120000"
+  },
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Edit(./src/**)",
+      "Edit(./tests/**)",
+      "Bash(./gradlew build)",
+      "Bash(./gradlew test)",
+      "Bash(mvn compile)",
+      "Bash(mvn test)"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Read(*secret*)",
+      "Read(*credential*)",
+      "Read(*password*)",
+      "Edit(.*)",
+      "Edit(*.properties)",
+      "Edit(application*.yml)"
+    ]
+  }
+}

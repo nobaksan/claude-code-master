@@ -1,0 +1,29 @@
+{
+  "name": "korean-dev-tools",
+  "owner": { "name": "Korean Dev Tools 팀" },
+  "description": "한국 개발자를 위한 플러그인 모음",
+  "plugins": [
+    {
+      "name": "naver-api",
+      "source": "./plugins/naver-api",
+      "description": "네이버 API 통합 도구",
+      "category": "api-integration"
+    },
+    {
+      "name": "kakao-deploy",
+      "source": "./plugins/kakao-deploy",
+      "description": "카카오 클라우드 배포 자동화",
+      "category": "deployment"
+    },
+    {
+      "name": "korean-docs",
+      "source": {
+        "source": "github",
+        "repo": "korean-dev-tools/korean-docs",
+        "ref": "v2.0.0"
+      },
+      "description": "한국어 기술 문서 생성기",
+      "category": "documentation"
+    }
+  ]
+}

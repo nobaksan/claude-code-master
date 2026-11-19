@@ -1,0 +1,10 @@
+# .github/branch-protection-rules.yml (참고용 표기. 실제 설정은 GitHub 저장소 설정이나 API에서 한다)
+protection_rules:
+  main:
+    required_reviews: 1 # 최소 1명 리뷰 필수
+    required_status_checks:
+      - ci/test
+      - ci/lint
+      - ci/type-check
+    dismiss_stale_reviews: true # 새 커밋 시 기존 승인 무효화
+    require_code_owner_review: true # CODEOWNERS 리뷰 필수

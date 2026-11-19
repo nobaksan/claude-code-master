@@ -1,0 +1,44 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc *)",
+      "Bash(find *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git branch *)",
+      "Bash(git show *)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npm ci)",
+      "Bash(python -m pytest *)",
+      "Bash(cargo test *)",
+      "Bash(cargo build *)",
+      "Bash(go test *)",
+      "Edit(*.md)",
+      "Edit(./docs/**)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git reset *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(su *)",
+      "Bash(chmod 777 *)",
+      "Read(.env*)",
+      "Read(*.pem)",
+      "Read(*.key)",
+      "Read(*secret*)",
+      "Edit(.env*)",
+      "Edit(*.pem)",
+      "Edit(*.key)",
+      "Bash(bash)",
+      "Bash(sh)",
+      "Bash(npm publish *)",
+      "Bash(docker push *)",
+      "Bash(kubectl apply *)",
+      "Bash(terraform apply *)"
+    ]
+  }
+}

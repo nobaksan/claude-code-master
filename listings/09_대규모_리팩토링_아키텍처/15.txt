@@ -1,0 +1,1 @@
+ultracode: src/routes/ 아래 모든 API 엔드포인트에서 인증 검사가 빠진 곳을 감사해줘

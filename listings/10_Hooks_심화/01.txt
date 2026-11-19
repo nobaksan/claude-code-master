@@ -1,0 +1,7 @@
+~/.claude/settings.json        # 전역 설정 (개인 머신의 모든 프로젝트에 적용)
+.claude/settings.json          # 프로젝트 팀 설정 (Git 버전 관리에 포함, 팀 공유)
+.claude/settings.local.json    # 프로젝트 로컬 설정 (gitignore 대상, 개인화된 환경)
+관리형(managed) 정책 설정       # 조직 전체, 관리자가 배포
+플러그인 hooks/hooks.json       # 플러그인을 켠 동안
+스킬 프런트매터 hooks           # 스킬을 부른 뒤 세션이 끝날 때까지
+서브에이전트 프런트매터 hooks    # 그 서브에이전트가 도는 동안

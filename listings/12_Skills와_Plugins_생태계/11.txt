@@ -1,0 +1,2 @@
+## 롤백
+문제가 생기면 helm rollback app 을 실행한다.

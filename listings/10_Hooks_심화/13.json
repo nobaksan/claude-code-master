@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -q 'TODO' docs/api-spec.md && (echo 'API 명세서에 미완성 TODO 항목이 존재합니다. 작성을 완료하세요.' >&2; exit 2) || exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}

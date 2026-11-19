@@ -1,0 +1,12 @@
+{
+  "id": "msg-20260905-001",
+  "from": "orchestrator",
+  "to": "requirement",
+  "type": "task",
+  "payload": {
+    "action": "analyze_requirements",
+    "userPrompt": "로컬 스토리지를 활용하는 반응형 TODO 웹 앱을 제작해줘.",
+    "outputFile": "artifacts/requirements.md"
+  },
+  "timestamp": "2026-09-05T10:00:00Z"
+}

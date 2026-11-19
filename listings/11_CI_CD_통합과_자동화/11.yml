@@ -1,0 +1,29 @@
+# .github/workflows/claude-maintenance.yml
+name: Claude Code Maintenance
+on:
+  schedule:
+    - cron: '0 9 * * 1' # 매주 월요일 9시(UTC)
+  workflow_dispatch: # 수동 실행 가능
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            코드베이스를 분석해서 다음을 찾는다.
+            1. 사용되지 않는 의존성
+            2. 오래된 TODO 주석
+            3. 중복 코드
+            4. 잠재적 보안 이슈
+            각각에 대해 gh issue create로 GitHub Issue를 만든다.
+          claude_args: '--max-turns 30 --allowedTools "Read,Glob,Grep,Bash(gh issue create *)"'

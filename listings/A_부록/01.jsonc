@@ -1,0 +1,34 @@
+{
+  // 1. 권한: 도구 사용 허용/차단 목록과 기본 동작
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",     // 특정 패턴의 셸 명령 허용
+      "Read",                // 모든 읽기 허용
+      "Edit(*.ts)",          // TS 파일 생성·수정 허용 (Write(...) 규칙은 매치되지 않으므로 Edit로 쓴다)
+      "Edit(src/**)"         // src 디렉터리 안 수정 허용
+    ],
+    "deny": [
+      "Bash(rm -rf *)",      // 위험한 삭제 명령 차단
+      "Bash(sudo *)"         // 관리자 권한 명령 차단
+    ],
+    "defaultMode": "default" // default(별칭 manual) · acceptEdits · plan · auto · dontAsk · bypassPermissions
+                             // auto와 bypassPermissions는 프로젝트 설정에서 지정할 수 없다 (2.4절)
+  },
+
+  // 2. 모델과 추론 깊이 (부록 G)
+  "model": "sonnet",                // 별칭 opus(기본, Opus 5.5) · sonnet · haiku · fable 또는 전체 ID
+  "effortLevel": "medium",          // low · medium · high · xhigh. max는 이 키로 저장할 수 없고 --effort·/effort로 세션에만 준다 (5.2절)
+  "alwaysThinkingEnabled": false,   // false면 사고를 끈다. 5.5 세대와 Fable은 끌 수 없다
+
+  // 3. 환경 변수 주입
+  "env": {
+    "NODE_ENV": "development",
+    "DEBUG": "true"
+  },
+
+  // 4. MCP — 서버 정의는 .mcp.json 에, 여기서는 승인 정책만
+  "enableAllProjectMcpServers": true,
+
+  // 5. Hook 설정 (부록 B)
+  "hooks": {}
+}

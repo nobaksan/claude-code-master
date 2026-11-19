@@ -1,0 +1,58 @@
+# .github/workflows/deploy-pipeline.yml
+name: Full Deployment Pipeline
+on:
+  push:
+    branches: [main]
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.decision.outputs.deploy }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+      - name: Claude Code Quality Gate
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash
+          export PATH="$HOME/.local/bin:$PATH"
+          # 전체 코드 품질 검사
+          claude --print "다음 변경사항을 검토하고 배포 가능 여부를 판단해줘:
+
+          $(git diff HEAD~1)
+
+          배포 가능하면 'DEPLOY_OK', 문제있으면 'DEPLOY_BLOCK: [이유]'로만 응답해줘." > claude_output.txt
+      - name: Parse Decision
+        id: decision
+        run: |
+          RESULT=$(cat claude_output.txt)
+          if echo "$RESULT" | grep -q "DEPLOY_OK"; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "reason=$(echo "$RESULT" | grep -o 'DEPLOY_BLOCK: .*')" >> "$GITHUB_OUTPUT"
+          fi
+  deploy-staging:
+    needs: quality-gate
+    if: needs.quality-gate.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Deploy to Staging
+        # 배포 명령은 사용하는 플랫폼(Railway, Vercel, AWS 등)의 CLI와 인증 설정에 맞게 바꾼다
+        run: railway up --environment staging
+      - name: Smoke Test
+        run: |
+          sleep 30 # 배포 대기
+          curl -f https://staging.myapp.com/health || exit 1
+          echo "스테이징 smoke test 통과"
+  deploy-production:
+    needs: deploy-staging
+    environment: production # GitHub 수동 승인 필요
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Deploy to Production
+        run: railway up --environment production

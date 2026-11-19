@@ -1,0 +1,11 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "allowWrite": ["~/.kube", "/tmp/build"]
+    },
+    "network": {
+      "allowedDomains": ["registry.npmjs.org"]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+project/
+├── .agents/                      # 에이전트 간 IPC 루트 디렉터리
+│   ├── orchestrator/
+│   │   ├── inbox/                # 외부에서 수신된 작업 지시 메시지
+│   │   ├── outbox/               # 타 에이전트에 발송 대기 중인 메시지
+│   │   ├── processed/            # 처리가 완료된 아카이브 메시지
+│   │   └── status.json           # 현재 에이전트의 상태 및 메타데이터
+│   ├── architect/
+│   │   ├── inbox/
+│   │   ├── outbox/
+│   │   ├── processed/
+│   │   └── status.json
+│   └── ...                       # 기타 7개 에이전트별 동일 구조
+├── artifacts/                    # 공식 산출물 영구 저장소
+│   ├── requirements.md
+│   ├── ux-design.md
+│   ├── architecture.md
+│   └── test-spec.json
+└── src/                          # 실제 애플리케이션 소스 코드
